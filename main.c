@@ -44,7 +44,9 @@ int WINAPI WinMain(
   windowsClass.lpszClassName = "HandmadeHeroWindowClass";
 
 
-  
+  RegisterClassA(&windowsClass);
+
+  CreateWindowA("HandmadeHeroWindowClass", "Handmade Hero", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL , hInstance, NULL);
 
     return 0;
   };
