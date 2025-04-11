@@ -9,10 +9,12 @@ LRESULT CALLBACK  MainWindowCallback(
 
   switch (Msg) {
     case WM_SIZE:
-      OutputDebugStringA("WM_SIZE");
+      OutputDebugStringA("WM_SIZE\n");
       break;
     case WM_DESTROY:
     OutputDebugStringA("WM_DESTROY\n");
+    DestroyWindow(hWnd);
+    return 0;
       break;
     case WM_CLOSE:
     OutputDebugStringA("WM_CLOSE\n");
@@ -46,7 +48,20 @@ int WINAPI WinMain(
 
   RegisterClassA(&windowsClass);
 
-  CreateWindowA("HandmadeHeroWindowClass", "Handmade Hero", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL , hInstance, NULL);
+ HWND WindowHandle = CreateWindowA("HandmadeHeroWindowClass", "Handmade Hero", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL , hInstance, NULL);
+
+ if(WindowHandle){
+  ShowWindow(WindowHandle, nShowCmd);   
+  UpdateWindow(WindowHandle);   
+
+  MSG Message;
+
+ while(GetMessage(&Message , NULL ,0, 0)){
+  TranslateMessage(&Message);       
+  DispatchMessageA(&Message); 
+ }
+
+ }
 
     return 0;
   };
